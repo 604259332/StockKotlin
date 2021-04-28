@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/numlayout"
+        android:layout_height="match_parent"
+        style="@style/textfund_data"
+        app:gravity="0x1002"
+        app:bText="999900"
+        app:tText="100"
+        app:tbmargin="0" />
+
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/pricelayout"
+        android:layout_height="match_parent"
+        style="@style/textfund_data"
+        app:gravity="0x1002"
+        app:bText="myprice"
+        app:tText="price"
+        app:tbmargin="0" />
+
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/totallayout"
+        android:layout_height="match_parent"
+        style="@style/textfund_data"
+        app:gravity="0x1002"
+        app:bText="profitpercent"
+        app:tText="profit"
+        app:tbmargin="0" />
+
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/todaylayout"
+        android:layout_height="match_parent"
+        style="@style/textfund_data"
+        app:gravity="0x1002"
+        app:bText="todaypercent"
+        app:tText="today"
+        app:tbmargin="0" />
+
+    <TextView
+        android:id="@+id/percentlayout"
+        android:layout_height="match_parent"
+        style="@style/textfund_data"
+        android:gravity="center"
+        android:text="percent" />
+
+</LinearLayout>

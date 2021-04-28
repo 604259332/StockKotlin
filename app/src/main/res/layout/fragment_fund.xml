@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- first row -->
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/totalFund"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:padding="10dp"
+        app:gravity="0x1002"
+        app:bText="1530000"
+        app:tText="人民币总资产"
+        app:tbmargin="15"
+        />
+
+    <ImageView
+        android:id="@+id/hide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_appicon"
+        app:layout_constraintLeft_toRightOf="@id/totalFund"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@+id/todayfund"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="今日盈亏"
+        />
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/todayfund"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:gravity="0x1002"
+        app:bText="2.00%"
+        app:tText="1000"
+        app:tbmargin="15"
+        />
+
+    <!-- second row -->
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/totalstock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/totalFund"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/totalprofit"
+        android:padding="10dp"
+        app:gravity="0x1001"
+        app:bText="150000"
+        app:tText="持仓市值(元)"
+        app:tbmargin="15"
+        />
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/totalprofit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toRightOf="@id/totalstock"
+        app:layout_constraintRight_toLeftOf="@+id/kuse"
+        app:layout_constraintTop_toBottomOf="@id/totalFund"
+        android:padding="10dp"
+        app:gravity="0x1001"
+        app:bText="ren"
+        app:tText="持仓盈亏(元)"
+        app:tbmargin="15"
+        />
+    <com.android.stockkotlin.ui.TwoTextLayout
+        android:id="@+id/kuse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toRightOf="@id/totalprofit"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalFund"
+        android:padding="10dp"
+        app:gravity="0x1001"
+        app:bText="ren"
+        app:tText="可用(元)"
+        app:tbmargin="15"
+        />
+
+    <include layout="@layout/fragment_gallery"
+        app:layout_constraintTop_toBottomOf="@id/totalstock"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_height="0dp"
+        android:layout_width="match_parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

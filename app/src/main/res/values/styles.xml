@@ -1,0 +1,58 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/theme_red</item>
+        <item name="colorPrimaryDark">@color/theme_red</item>
+        <item name="colorAccent">#DDD31212</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="textStyle_homedata">
+        <!--字体一 样式-->
+        <item name="android:textSize"> 18dp</item>
+        <item name="android:gravity">right</item>
+        <item name="android:paddingRight">5dp</item>
+        <!--设置大小-->
+        <item name="android:color">#302F2F</item>
+        <!--设置颜色-->
+    </style>
+
+    <style name="textStyle_hometitle">
+        <!--字体一 样式-->
+        <item name="android:textSize"> 15dp</item>
+        <item name="android:gravity">right</item>
+        <item name="android:padding">5dp</item>
+        <!--设置大小-->
+        <item name="android:color">#302F2F</item>
+        <!--设置颜色-->
+    </style>
+
+    <style name="textfund_titile">
+        <item name="android:layout_width">90dp</item>
+        <!--字体一 样式-->
+        <item name="android:gravity">right</item>
+        <item name="android:padding">8dp</item>
+        <!--设置大小-->
+        <!--设置颜色-->
+    </style>
+
+    <style name="textfund_data">
+        <item name="android:layout_width">90dp</item>
+        <!--字体一 样式-->
+        <item name="android:gravity">right</item>
+        <item name="android:padding">8dp</item>
+        <!--设置大小-->
+        <!--设置颜色-->
+    </style>
+
+
+</resources>

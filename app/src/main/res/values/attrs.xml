@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="view2Text">
+        <attr name="tText" format="string"/>
+        <attr name="bText" format="string"/>
+        <attr name="tTextSize" format="integer"/>
+        <attr name="bTextSize" format="integer"/>
+        <attr name="tbmargin" format="integer"/>
+        <attr name="gravity" format="integer"/>
+    </declare-styleable>
+</resources>

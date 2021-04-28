@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_home">self</string>
+    <string name="menu_gallery">mine</string>
+    <string name="menu_slideshow">添加</string>
+
+    <string name="addsuccess"> 添加成功</string>
+</resources>

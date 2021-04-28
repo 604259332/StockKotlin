@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.stockkotlin.ui.TwoTextLayout
+    android:id="@+id/stocklayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/textfund_data"
+    app:tbmargin="0"
+    app:tText="name"
+    app:bText="amount">
+</com.android.stockkotlin.ui.TwoTextLayout>
