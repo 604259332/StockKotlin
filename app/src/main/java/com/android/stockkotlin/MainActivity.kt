@@ -14,8 +14,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.android.strategy.Insert
-import com.android.strategy.InsertStockData
+import com.android.stockkotlin.strategy.Insert
+import com.android.stockkotlin.strategy.InsertStockData
+import com.android.stockkotlin.util.floatTail
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_import.*
 
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             when(nav_view.checkedItem){
                 nav_view.menu.findItem(R.id.nav_home) -> {
                     Log.d("zhihai" , "is HomeFragment")
+
                 }
                 nav_view.menu.findItem(R.id.nav_gallery) ->{
                     Log.d("zhihai" , "is GalleryFragment")

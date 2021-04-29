@@ -1,4 +1,4 @@
-package com.android.data
+package com.android.stockkotlin.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -26,21 +26,22 @@ class Stock() {
         this.name = name
     }
 
-    val current_dp:String
+    val current_dp:Float
         get() {
-            if(price == 0f){
-                return "0.00"
-            }
-            return Util.float_T2(price - close)
+            checkprice()
+            return price - close
         }
-     val current_percentage:String
+     val current_percentage:Float
         get() {
-            if(price == 0f){
-                return "0.00%"
-            }
-            return Util.float_T2(Math.abs((price - close)/close)*100) +"%"
+            checkprice()
+            return (price - close)/close*100f
         }
 
+    fun checkprice(){
+        if(price == 0f){
+            price = close
+        }
+    }
     override fun toString(): String {
         return "Stock(id=$id, stockid='$stockid', name='$name', open=$open, close=$close, price=$price)"
     }

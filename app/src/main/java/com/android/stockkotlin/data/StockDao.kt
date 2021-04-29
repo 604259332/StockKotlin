@@ -1,4 +1,4 @@
-package com.android.data
+package com.android.stockkotlin.data
 
 import androidx.room.Dao
 import androidx.room.Delete

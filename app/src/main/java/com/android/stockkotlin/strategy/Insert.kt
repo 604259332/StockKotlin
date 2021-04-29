@@ -1,7 +1,7 @@
-package com.android.strategy
+package com.android.stockkotlin.strategy
 
 import android.content.Context
-import com.android.data.AppDatabase
+import com.android.stockkotlin.data.AppDatabase
 
 interface Insert {
     fun insertData(context: Context, stockid: String, myprice: Float, num: Int)

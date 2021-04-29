@@ -6,8 +6,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.data.*
 import com.android.stockkotlin.VolleySingletion
+import com.android.stockkotlin.data.AppDatabase
+import com.android.stockkotlin.data.Fund
+import com.android.stockkotlin.data.FundDao
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 
@@ -23,7 +25,7 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
         Log.d("zhihai.yu","Fund apply")
 
         value = listOf<Fund>(
-            Fund("sz002230","test Name")
+            Fund("sz002230", "test Name")
         )
     }
     val funds:LiveData<List<Fund>>
@@ -32,11 +34,11 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
         }
 
     fun fetchData() {
-        Log.d("zhihai dao", fundDao.getAll().toString())
         var fundlist: MutableList<Fund> = ArrayList<Fund>()
         var result: List<String>
+
         for (localfund in fundDao.getAll()) {
-            Log.d("zhihai", "${testurl + localfund.stockid}")
+            Log.d("zhihaitest", "${testurl + localfund.stockid}")
             var stringRequest: StringRequest =
                 StringRequest(testurl + localfund.stockid, Response.Listener<String> {
                     Log.d("zhihai", it)

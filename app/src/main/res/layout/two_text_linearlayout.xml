@@ -10,6 +10,7 @@
         android:singleLine="true"
         android:text="TextView"
         android:paddingRight="5dp"
+        android:textColor="@color/greytext"
         />
     <TextView
         android:id="@+id/bottom_tv"
@@ -18,5 +19,6 @@
         android:singleLine="true"
         android:text="TextView"
         android:paddingRight="5dp"
+        android:textColor="@color/greytext"
         />
 </LinearLayout>

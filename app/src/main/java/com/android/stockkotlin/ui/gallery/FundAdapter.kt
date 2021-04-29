@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.data.Fund
+import com.android.stockkotlin.data.Fund
 import com.android.stockkotlin.R
 import com.android.stockkotlin.ui.TwoTextLayout
+import com.android.stockkotlin.util.digitIs1or5
+import com.android.stockkotlin.util.floatTail
 import kotlinx.android.synthetic.main.left_selfitem.view.*
 import kotlinx.android.synthetic.main.selfitem.view.*
 
@@ -60,13 +62,18 @@ class FundAdapter(
         val s = mlist.get(position)
 
         if (leftorright == 0) {
-            holder.stocklayout.setAllText(s.name, s.amount.toString())
+            holder.stocklayout.setAllText(s.name, s.amount.floatTail(2))
         } else {
             holder.numlayout.setAllText(s.num.toString() , s.num.toString())
-            holder.pricelayout.setAllText(s.price.toString(), s.myprice.toString())
-            holder.totallayout.setAllText(s.profit.toString(), s.profitpercent.toString())
-            holder.todaylayout.setAllText(s.today, s.todaypercent)
-            holder.percentlayout.text = s.percent.toString()
+            if(s.stockid.digitIs1or5()){
+                holder.pricelayout.setAllText(s.price.floatTail(3), s.myprice.floatTail(3))
+            }else{
+                holder.pricelayout.setAllText(s.price.floatTail(2), s.myprice.floatTail(3))
+            }
+            holder.pricelayout.setAllText(s.price, s.myprice)
+            holder.totallayout.setAllText(s.profit.floatTail(2), s.profitpercent.floatTail(2)+"%")
+            holder.todaylayout.setAllText(s.today.floatTail(2), s.todaypercent.floatTail(2)+"%")
+            holder.percentlayout.text = s.percent.floatTail(2)
         }
 
         holder.v.setOnLongClickListener {

@@ -1,4 +1,4 @@
-package com.android.data
+package com.android.stockkotlin.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,9 +11,10 @@ class Fund() {
     var stockid:String="0"
 
     var name:String=""
-    val amount: String
+    val amount: Float
         get() {
-            return Util.float_T2(price * num)
+            checkprice()
+            return price * num
         }
 
     var num:Int=0
@@ -22,24 +23,38 @@ class Fund() {
     var price: Float=1.00f
     var close: Float=1.00f
 
-    val profit:String
+    val profit:Float
         get() {
-            return Util.float_T2((price - myprice)*num)
+            checkprice()
+            return (price - myprice)*num
         }
-    val profitpercent:String
+    val profitpercent:Float
         get() {
-            return Util.float_T2(((price-myprice)/myprice)*100)+"%"
+            checkprice()
+            return ((price-myprice)/myprice)*100f
         }
 
-    val today:String
+    val today:Float
         get() {
-            return Util.float_T2((price - close)*num)
+            checkprice()
+            return (price - close)*num
         }
-    val todaypercent:String
+    val todaypercent:Float
         get() {
-            return Util.float_T2(Math.abs((price - close)/close)*100) +"%"
+            checkprice()
+            return (price - close)/close*100f
         }
     var percent:Float=0f
+
+    fun checkprice(){
+        if(price == 0f){
+            price = close
+        }
+    }
+
+    override fun toString(): String {
+        return "Fund(id=$id, stockid='$stockid', name='$name', num=$num, myprice=$myprice, price=$price, close=$close, percent=$percent)"
+    }
 
     constructor(stockid: String) : this() {
         if(!stockid.equals("")){
@@ -58,9 +73,6 @@ class Fund() {
         this.num = num
     }
 
-    override fun toString(): String {
-        return "Fund(id=$id, stockid='$stockid', name='$name', amount=$amount, num=$num, myprice=$myprice, price=$price, close=$close, profit=$profit, profitpercent=$profitpercent, today=$today, todaypercent=$todaypercent, percent=$percent)"
-    }
 
 
 }

@@ -5,10 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.android.data.AppDatabase
-import com.android.data.Fund
-import com.android.data.Stock
-import com.android.data.StockDao
+import com.android.stockkotlin.data.AppDatabase
+import com.android.stockkotlin.data.Fund
+import com.android.stockkotlin.data.Stock
+import com.android.stockkotlin.data.StockDao
 import com.android.stockkotlin.VolleySingletion
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -16,7 +16,7 @@ import kotlin.collections.ArrayList
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    lateinit var stockDao:StockDao
+    lateinit var stockDao: StockDao
     val testurl = "https://hq.sinajs.cn/list="
     init {
         stockDao = AppDatabase.getDatabase(application).stockDao()
@@ -24,9 +24,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _stocks = MutableLiveData<List<Stock>>().apply {
         value = listOf<Stock>(
-            Stock("sz002230","test Name"),
-            Stock("sh600585","test Name"),
-            Stock("sh600150","test Name")
+            Stock("sz002230" ),
+            Stock("sh600585" ),
+            Stock("sh600150")
         )
     }
     val stocks:LiveData<List<Stock>>
@@ -35,9 +35,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
 
     fun fetchData() {
-        Log.d("zhihai", stockDao.getAll().toString())
         var stocklist: MutableList<Stock> = ArrayList<Stock>()
         var result: List<String>
+
         for (localstock in stockDao.getAll()) {
             Log.d("zhihai", "${testurl + localstock.stockid}")
             var stringRequest: StringRequest =

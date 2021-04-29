@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.android.stockkotlin.R
-import com.android.strategy.Insert
-import com.android.strategy.InsertFundData
-import com.android.strategy.InsertStockData
+import com.android.stockkotlin.strategy.Insert
+import com.android.stockkotlin.strategy.InsertFundData
+import com.android.stockkotlin.strategy.InsertStockData
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_import.*
 

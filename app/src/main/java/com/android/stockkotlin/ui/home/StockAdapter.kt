@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.data.Stock
+import com.android.stockkotlin.data.Stock
 import com.android.stockkotlin.R
 import com.android.stockkotlin.ui.TwoTextLayout
+import com.android.stockkotlin.util.digitIs1or5
+import com.android.stockkotlin.util.floatTail
 import kotlinx.android.synthetic.main.stockitem.view.*
 
 class StockAdapter(var mlist: List<Stock>) : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
@@ -31,14 +33,16 @@ class StockAdapter(var mlist: List<Stock>) : RecyclerView.Adapter<StockAdapter.S
 
     override fun onBindViewHolder(holder: StockViewHolder, position: Int) {
         val s = mlist.get(position)
-        holder.tvlayout.setAllText(s.name, s.stockid.toString())
-        if(s.price==0f){
-            holder.price_tv.text = "${s.close}"
+        holder.tvlayout.setAllText(s.name, s.stockid.filter { it.isDigit() })
+        if(s.stockid.digitIs1or5()){
+            holder.price_tv.text = s.price.floatTail(3)
+            holder.current_dp_tv.text = s.current_dp.floatTail(3)
         }else{
-            holder.price_tv.text = "${s.price}"
+            holder.price_tv.text = s.price.floatTail(2)
+            holder.current_dp_tv.text = s.current_dp.floatTail(2)
         }
-        holder.current_dp_tv.text = "${s.current_dp}"
-        holder.current_percentage_tv.text = "${s.current_percentage}"
+
+        holder.current_percentage_tv.text = s.current_percentage.floatTail(2)+"%"
 
         setTvcolor(s.current_dp.toFloat(), holder.price_tv, holder.current_dp_tv, holder.current_percentage_tv)
 

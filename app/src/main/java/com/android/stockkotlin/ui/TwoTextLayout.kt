@@ -73,9 +73,14 @@ class TwoTextLayout:LinearLayout{
     }
 
     fun setAllText(top:String ,bottom:String){
-        Log.d("testt:" , top + " , bottom" + bottom)
         top_tv.text = top
         bottom_tv.text = bottom
+        invalidate()
+    }
+
+    fun setAllText(top:Float ,bottom:Float){
+        top_tv.text = top.toString()
+        bottom_tv.text = bottom.toString()
         invalidate()
     }
 
