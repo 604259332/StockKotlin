@@ -1,6 +1,7 @@
 package com.android.stockkotlin.util
 
 import android.util.Log
+import com.android.stockkotlin.data.Fund
 
 /**
  * @info a float keep N digits after decimal point
@@ -26,4 +27,33 @@ fun String.digitIs1or5():Boolean{
         }
     }
     return false
+}
+
+/**
+ * @info sum of amount ,profit , today
+ */
+fun List<Fund>.sum(n:String):Float{
+
+    var sum:Float =0f
+    when(n){
+        "amount" ->{
+
+            for(fund in this){
+                Log.d("zhihai.yu ppppppppppp:" , ""+fund.toString())
+                sum = sum+fund.amount
+            }
+        }
+        "profit" ->{
+            for(fund in this){
+                sum = sum+fund.profit
+            }
+        }
+        "today" ->{
+            for(fund in this){
+                sum = sum+fund.today
+            }
+        }else ->{ }
+    }
+
+    return sum
 }

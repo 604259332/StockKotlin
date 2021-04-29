@@ -11,8 +11,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.stockkotlin.R
+import com.android.stockkotlin.data.Fund
 import com.android.stockkotlin.ui.SimpleItemDecoration
 import com.android.stockkotlin.ui.SwapScrollView
+import com.android.stockkotlin.util.floatTail
+import com.android.stockkotlin.util.sum
+import kotlinx.android.synthetic.main.fragment_fund.*
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
 class GalleryFragment : Fragment(){
@@ -36,6 +40,8 @@ class GalleryFragment : Fragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
 
         left_rv.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -106,10 +112,26 @@ class GalleryFragment : Fragment(){
             (left_rv.adapter as FundAdapter).mlist = it
             (left_rv.adapter as FundAdapter).notifyDataSetChanged()
 
+            setmainFundText(galleryViewModel.funds.value!!)
+
             (right_rv.adapter as FundAdapter).mlist = it
             (right_rv.adapter as FundAdapter).notifyDataSetChanged()
         })
         galleryViewModel.fetchData()
+
+
+    }
+
+    fun setmainFundText(funds:List<Fund>){
+        var kuse_f=3285.79f
+        kuse.setBottomText(kuse_f.floatTail(2))
+        totalFund.setBottomText((funds.sum("amount") + kuse_f).floatTail(2))
+
+        totalstock.setBottomText(funds.sum("amount").floatTail(2))
+
+        totalprofit.setBottomText(funds.sum("profit").floatTail(2))
+
+        todayfund.setBottomText(funds.sum("today").floatTail(2))
 
     }
 

@@ -70,7 +70,6 @@ class FundAdapter(
             }else{
                 holder.pricelayout.setAllText(s.price.floatTail(2), s.myprice.floatTail(3))
             }
-            holder.pricelayout.setAllText(s.price, s.myprice)
             holder.totallayout.setAllText(s.profit.floatTail(2), s.profitpercent.floatTail(2)+"%")
             holder.todaylayout.setAllText(s.today.floatTail(2), s.todaypercent.floatTail(2)+"%")
             holder.percentlayout.text = s.percent.floatTail(2)
