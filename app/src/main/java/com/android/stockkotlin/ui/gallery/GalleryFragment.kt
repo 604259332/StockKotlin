@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.stockkotlin.R
 import com.android.stockkotlin.data.Fund
+import com.android.stockkotlin.ui.HeadRecyclerAdapter
 import com.android.stockkotlin.ui.SimpleItemDecoration
 import com.android.stockkotlin.ui.SwapScrollView
 import com.android.stockkotlin.util.floatTail
@@ -42,13 +43,16 @@ class GalleryFragment : Fragment(){
         super.onActivityCreated(savedInstanceState)
 
 
+        var left_adapter = LeftFundAdapter(galleryViewModel.funds.value!!)
 
         left_rv.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = FundAdapter(this@GalleryFragment, galleryViewModel.funds.value!!, 0)
             addItemDecoration(SimpleItemDecoration(context, LinearLayoutManager.HORIZONTAL))
-
+            adapter=left_adapter
         }
+        left_adapter.setHeaderView(LayoutInflater.from(context).inflate(R.layout.fund_left_head, left_rv, false))
+
+
         rightScrollView.setScrollViewListener(object : SwapScrollView.ScrollViewListener {
             override fun onScrollChanged(
                 scrollView: SwapScrollView?,
@@ -101,16 +105,16 @@ class GalleryFragment : Fragment(){
         })
 
 
-        (left_rv.adapter as FundAdapter).setOnLongClickListener(object :FundAdapter.OnLongClickListener{
-            override fun onLongClick(v: View?, position: Int) {
-                val s = galleryViewModel.funds.value!!.get(position)
-                galleryViewModel.deleteByStockId(s.stockid)
+        left_adapter.setOnLongClickListener(object :HeadRecyclerAdapter.OnLongClickListener<Fund>{
+
+            override fun onLongClick(v: View?, position: Int, data: Fund) {
+                galleryViewModel.deleteByStockId(data.stockid)
             }
         })
 
         galleryViewModel.funds.observe(viewLifecycleOwner, Observer {
-            (left_rv.adapter as FundAdapter).mlist = it
-            (left_rv.adapter as FundAdapter).notifyDataSetChanged()
+            left_adapter.datas = it
+            left_adapter.notifyDataSetChanged()
 
             setmainFundText(galleryViewModel.funds.value!!)
 

@@ -10,8 +10,8 @@ import com.android.stockkotlin.R
 import com.android.stockkotlin.ui.TwoTextLayout
 import com.android.stockkotlin.util.digitIs1or5
 import com.android.stockkotlin.util.floatTail
-import kotlinx.android.synthetic.main.left_selfitem.view.*
-import kotlinx.android.synthetic.main.selfitem.view.*
+import kotlinx.android.synthetic.main.fund_left_item.view.*
+import kotlinx.android.synthetic.main.fund_right_item.view.*
 
 class FundAdapter(
     var fra: GalleryFragment,
@@ -46,9 +46,9 @@ class FundAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FundAdapter.FundViewHolder {
         val view:View
         if(leftorright == 0){
-            view= LayoutInflater.from(parent.context).inflate(R.layout.left_selfitem,parent,false)
+            view= LayoutInflater.from(parent.context).inflate(R.layout.fund_left_item,parent,false)
         }else {
-            view= LayoutInflater.from(parent.context).inflate(R.layout.selfitem,parent,false)
+            view= LayoutInflater.from(parent.context).inflate(R.layout.fund_right_item,parent,false)
         }
 
         return FundViewHolder(view,leftorright)
