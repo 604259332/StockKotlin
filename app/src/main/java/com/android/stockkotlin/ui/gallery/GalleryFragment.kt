@@ -18,7 +18,7 @@ import com.android.stockkotlin.ui.SwapScrollView
 import com.android.stockkotlin.util.floatTail
 import com.android.stockkotlin.util.sum
 import kotlinx.android.synthetic.main.fragment_fund.*
-import kotlinx.android.synthetic.main.fragment_gallery.*
+import kotlinx.android.synthetic.main.fragment_fund_recycleviewlayout.*
 
 class GalleryFragment : Fragment(){
 
@@ -70,11 +70,15 @@ class GalleryFragment : Fragment(){
             }
         })
 
+        var right_adapter = RightFundAdapter(galleryViewModel.funds.value!!)
+
         right_rv.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = FundAdapter(this@GalleryFragment, galleryViewModel.funds.value!!, 1)
             addItemDecoration(SimpleItemDecoration(context, LinearLayoutManager.HORIZONTAL))
+            adapter=right_adapter
         }
+        right_adapter.setHeaderView(LayoutInflater.from(context).inflate(R.layout.fund_right_head, right_rv, false))
+
 
         left_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -117,9 +121,8 @@ class GalleryFragment : Fragment(){
             left_adapter.notifyDataSetChanged()
 
             setmainFundText(galleryViewModel.funds.value!!)
-
-            (right_rv.adapter as FundAdapter).mlist = it
-            (right_rv.adapter as FundAdapter).notifyDataSetChanged()
+            right_adapter.datas = it
+            right_adapter.notifyDataSetChanged()
         })
         galleryViewModel.fetchData()
 

@@ -37,6 +37,7 @@
 
     <style name="textfund_titile">
         <item name="android:layout_width">90dp</item>
+        <item name="android:background">@color/cardview_shadow_start_color</item>
         <!--字体一 样式-->
         <item name="android:gravity">right</item>
         <item name="android:padding">8dp</item>
@@ -49,7 +50,8 @@
         <item name="android:layout_width">90dp</item>
         <!--字体一 样式-->
         <item name="android:gravity">right</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
         <!--设置大小-->
         <!--设置颜色-->
     </style>

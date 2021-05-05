@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/num_tv"
+        android:layout_height="wrap_content"
+        android:layout_width="85dp"
+        style="@style/textfund_titile"
+        android:text="数量/可用"
+       />
+
+    <TextView
+        android:id="@+id/price_tv"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:text="现价/成本"
+        style="@style/textfund_titile"
+       />
+    <TextView
+        android:id="@+id/total_tv"
+        android:layout_height="wrap_content"
+        android:text="持仓盈亏"
+        style="@style/textfund_titile"
+       />
+    <TextView
+        android:id="@+id/today_tv"
+        android:layout_height="wrap_content"
+        android:text="今日盈亏"
+        style="@style/textfund_titile"
+        />
+    <TextView
+        android:id="@+id/percent_tv"
+        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:text="持仓占比"
+        style="@style/textfund_titile"
+        />
+
+
+</LinearLayout>

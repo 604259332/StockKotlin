@@ -8,8 +8,11 @@
     <com.android.stockkotlin.ui.TwoTextLayout
         android:id="@+id/numlayout"
         android:layout_height="match_parent"
+        android:layout_width="85dp"
         style="@style/textfund_data"
         app:gravity="0x1002"
+        app:tTextSize="14"
+        app:bTextSize="14"
         app:bText="999900"
         app:tText="100"
         app:tbmargin="0" />
@@ -17,7 +20,10 @@
     <com.android.stockkotlin.ui.TwoTextLayout
         android:id="@+id/pricelayout"
         android:layout_height="match_parent"
+        android:layout_width="85dp"
         style="@style/textfund_data"
+        app:tTextSize="14"
+        app:bTextSize="14"
         app:gravity="0x1002"
         app:bText="myprice"
         app:tText="price"
@@ -28,6 +34,8 @@
         android:layout_height="match_parent"
         style="@style/textfund_data"
         app:gravity="0x1002"
+        app:tTextSize="14"
+        app:bTextSize="14"
         app:bText="profitpercent"
         app:tText="profit"
         app:tbmargin="0" />
@@ -37,6 +45,8 @@
         android:layout_height="match_parent"
         style="@style/textfund_data"
         app:gravity="0x1002"
+        app:tTextSize="14"
+        app:bTextSize="14"
         app:bText="todaypercent"
         app:tText="today"
         app:tbmargin="0" />
@@ -44,7 +54,10 @@
     <TextView
         android:id="@+id/percentlayout"
         android:layout_height="match_parent"
+        android:singleLine="true"
+        android:layout_width="75dp"
         style="@style/textfund_data"
+        android:textSize="14dp"
         android:gravity="center"
         android:text="percent" />
 
