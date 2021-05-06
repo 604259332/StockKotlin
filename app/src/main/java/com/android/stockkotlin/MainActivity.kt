@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 nav_view.menu.findItem(R.id.nav_gallery) ->{
-                    Log.d("zhihai" , "is GalleryFragment")
+                    Log.d("zhihai" , "is FundFragment")
                 }
             }
         }

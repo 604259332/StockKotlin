@@ -1,4 +1,4 @@
-package com.android.stockkotlin.ui.gallery
+package com.android.stockkotlin.ui.fund
 
 import android.os.Bundle
 import android.util.Log
@@ -20,21 +20,21 @@ import com.android.stockkotlin.util.sum
 import kotlinx.android.synthetic.main.fragment_fund.*
 import kotlinx.android.synthetic.main.fragment_fund_recycleviewlayout.*
 
-class GalleryFragment : Fragment(){
+class FundFragment : Fragment(){
 
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var fundViewModel: FundViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-            ViewModelProviders.of(this).get(GalleryViewModel::class.java)
+        fundViewModel =
+            ViewModelProviders.of(this).get(FundViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_fund, container, false)
 
-        Log.d("fish","galleryViewModel1 , "+galleryViewModel.toString())
+        Log.d("fish","galleryViewModel1 , "+fundViewModel.toString())
         return root
     }
 
@@ -43,7 +43,7 @@ class GalleryFragment : Fragment(){
         super.onActivityCreated(savedInstanceState)
 
 
-        var left_adapter = LeftFundAdapter(galleryViewModel.funds.value!!)
+        var left_adapter = LeftFundAdapter(fundViewModel.funds.value!!)
 
         left_rv.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -70,7 +70,7 @@ class GalleryFragment : Fragment(){
             }
         })
 
-        var right_adapter = RightFundAdapter(galleryViewModel.funds.value!!)
+        var right_adapter = RightFundAdapter(fundViewModel.funds.value!!)
 
         right_rv.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -112,19 +112,19 @@ class GalleryFragment : Fragment(){
         left_adapter.setOnLongClickListener(object :HeadRecyclerAdapter.OnLongClickListener<Fund>{
 
             override fun onLongClick(v: View?, position: Int, data: Fund) {
-                galleryViewModel.deleteByStockId(data.stockid)
+                fundViewModel.deleteByStockId(data.stockid)
             }
         })
 
-        galleryViewModel.funds.observe(viewLifecycleOwner, Observer {
+        fundViewModel.funds.observe(viewLifecycleOwner, Observer {
             left_adapter.datas = it
             left_adapter.notifyDataSetChanged()
 
-            setmainFundText(galleryViewModel.funds.value!!)
+            setmainFundText(fundViewModel.funds.value!!)
             right_adapter.datas = it
             right_adapter.notifyDataSetChanged()
         })
-        galleryViewModel.fetchData()
+        fundViewModel.fetchData()
 
 
     }

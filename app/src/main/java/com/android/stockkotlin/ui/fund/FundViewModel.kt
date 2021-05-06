@@ -1,11 +1,10 @@
-package com.android.stockkotlin.ui.gallery
+package com.android.stockkotlin.ui.fund
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.android.stockkotlin.VolleySingletion
 import com.android.stockkotlin.data.AppDatabase
 import com.android.stockkotlin.data.Fund
@@ -13,7 +12,7 @@ import com.android.stockkotlin.data.FundDao
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 
-class GalleryViewModel(application: Application) : AndroidViewModel(application) {
+class FundViewModel(application: Application) : AndroidViewModel(application) {
 
     lateinit var fundDao: FundDao
     val testurl = "https://hq.sinajs.cn/list="

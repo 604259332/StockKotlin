@@ -1,4 +1,4 @@
-package com.android.stockkotlin.ui.gallery
+package com.android.stockkotlin.ui.fund
 
 import android.view.LayoutInflater
 import android.view.View

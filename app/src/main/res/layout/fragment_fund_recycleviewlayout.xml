@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    tools:context=".ui.gallery.GalleryFragment">
+    tools:context=".ui.fund.FundFragment">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="95dp"

@@ -6,20 +6,21 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.stockkotlin.data.AppDatabase
-import com.android.stockkotlin.data.Fund
 import com.android.stockkotlin.data.Stock
-import com.android.stockkotlin.data.StockDao
 import com.android.stockkotlin.VolleySingletion
+import com.android.stockkotlin.strategy.StockDataStrategy
+import com.android.stockkotlin.strategy.SinaStockData
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import kotlin.collections.ArrayList
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    lateinit var stockDao: StockDao
-    val testurl = "https://hq.sinajs.cn/list="
+    lateinit var stockDataStrategy: StockDataStrategy<Stock>
+    lateinit var db:AppDatabase
     init {
-        stockDao = AppDatabase.getDatabase(application).stockDao()
+        db = AppDatabase.getDatabase(application)
+        stockDataStrategy = SinaStockData()
     }
 
     private val _stocks = MutableLiveData<List<Stock>>().apply {
@@ -34,40 +35,20 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
            return _stocks
         }
 
+
     fun fetchData() {
-        var stocklist: MutableList<Stock> = ArrayList<Stock>()
-        var result: List<String>
 
-        for (localstock in stockDao.getAll()) {
-            Log.d("zhihai", "${testurl + localstock.stockid}")
-            var stringRequest: StringRequest =
-                StringRequest(testurl + localstock.stockid, Response.Listener<String> {
+        var stringRequest: StringRequest =
+                StringRequest(stockDataStrategy.getParams(db), Response.Listener<String> {
+
                     Log.d("zhihai", it)
-                    if (it.contains("FAILED", false)) {
-                        return@Listener
-                    }
-                    result = it.split(",")
+                    _stocks.value = stockDataStrategy.parseResponse(it)
 
-                    var stock = Stock().apply {
-                        stockid = localstock.stockid
-                        name =
-                            result[0].filter { c -> c.toString().matches(Regex("[\u4e00-\u9fa5]")) }
-                        open = result[1].toFloat()
-                        close = result[2].toFloat()
-                        price = result[3].toFloat()
-                    }
-                    //test
-                    repeat(1){
-                        stocklist.add(stock)
-                    }
-
-
-                    _stocks.value = stocklist
                 }, Response.ErrorListener {
                     Log.d("zhihai.yu", it.toString())
                 })
-            VolleySingletion.requestQueue.add(stringRequest)
-        }
+        VolleySingletion.requestQueue.add(stringRequest)
+
         VolleySingletion.requestQueue.addRequestFinishedListener<String> {
 
         }
@@ -75,7 +56,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteByStockId(stockId:String){
 
-        stockDao.deleteByStockId(stockId)
+        db.stockDao().deleteByStockId(stockId)
 
         (_stocks.value as MutableList<Stock>).removeIf{
             stockId ==it.stockid
