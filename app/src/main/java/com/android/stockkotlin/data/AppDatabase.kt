@@ -54,7 +54,13 @@ abstract class AppDatabase : RoomDatabase(){
                         Stock("sh600109"),
                         Stock("sz300758"),
                         Stock("sz002230"),
-                        Stock("sz002926")
+                        Stock("sz002926"),
+
+                        Stock("sh601128"),
+                        Stock("sz000651"),
+                        Stock("sh600761"),
+                        Stock("sh603298"),
+                        Stock("sz159915")
                     ))
 
                     INSTANCE?.fundDao()?.insertAll(listOf<Fund>(

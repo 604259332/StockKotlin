@@ -34,7 +34,6 @@ class FundFragment : Fragment(){
             ViewModelProviders.of(this).get(FundViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_fund, container, false)
 
-        Log.d("fish","galleryViewModel1 , "+fundViewModel.toString())
         return root
     }
 

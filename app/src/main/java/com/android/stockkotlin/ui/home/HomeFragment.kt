@@ -10,8 +10,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.stockkotlin.R
+import com.android.stockkotlin.data.Stock
+import com.android.stockkotlin.ui.HeadRecyclerAdapter
 import com.android.stockkotlin.ui.SimpleItemDecoration
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import com.android.stockkotlin.ui.SwapScrollView
+import kotlinx.android.synthetic.main.fragment_home.cardView
+import kotlinx.android.synthetic.main.fragment_home.left_rv
+import kotlinx.android.synthetic.main.fragment_home.right_rv
+import kotlinx.android.synthetic.main.fragment_home.rightScrollView
 
 class HomeFragment : Fragment() {
 
@@ -25,31 +31,88 @@ class HomeFragment : Fragment() {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val recyclerView:RecyclerView = root.stocksRecyclerView
 
-        recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-        val adapter = StockAdapter(homeViewModel.stocks.value!!)
-        recyclerView.adapter =adapter
-        recyclerView.addItemDecoration(
-            SimpleItemDecoration(
-                container!!.context,
-                LinearLayoutManager.HORIZONTAL
-            )
-        )
-        adapter.setOnLongClickListener(object :StockAdapter.OnLongClickListener{
-            override fun onLongClick(v: View?, position: Int) {
-                val stock = homeViewModel.stocks.value!!.get(position)
-                homeViewModel.deleteByStockId(stock.stockid)
+        return root
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+
+        var left_adapter = LeftStockAdapter(homeViewModel.stocks.value!!)
+        left_rv.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(SimpleItemDecoration(context, LinearLayoutManager.HORIZONTAL))
+            adapter=left_adapter
+        }
+        left_adapter.setHeaderView(LayoutInflater.from(context).inflate(R.layout.home_left_head, left_rv, false))
+        left_adapter.setOnLongClickListener(object : HeadRecyclerAdapter.OnLongClickListener<Stock>{
+
+            override fun onLongClick(v: View?, position: Int, data: Stock) {
+                homeViewModel.deleteByStockId(data.stockid)
+            }
+        })
+        rightScrollView.setScrollViewListener(object : SwapScrollView.ScrollViewListener {
+            override fun onScrollChanged(
+                scrollView: SwapScrollView?,
+                x: Int,
+                y: Int,
+                oldx: Int,
+                oldy: Int
+            ) {
+                if (x != 0) {
+                    cardView.setCardElevation(8f);
+                } else {
+                    cardView.setCardElevation(0f);
+                }
+
+            }
+        })
+
+        var right_adapter = RightStockAdapter(homeViewModel.stocks.value!!)
+
+        right_rv.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(SimpleItemDecoration(context, LinearLayoutManager.HORIZONTAL))
+            adapter=right_adapter
+        }
+        right_adapter.setHeaderView(LayoutInflater.from(context).inflate(R.layout.home_right_head, right_rv, false))
+        left_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
+                    right_rv.scrollBy(dx, dy);
+                }
             }
 
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
+
+        right_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
+                    left_rv.scrollBy(dx, dy);//使左边recyclerView进行联动
+                }
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
         })
 
         homeViewModel.stocks.observe(viewLifecycleOwner, Observer {
-            adapter.mlist = it
-            adapter.notifyDataSetChanged()
+            left_adapter.datas = it
+            left_adapter.notifyDataSetChanged()
+
+            right_adapter.datas = it
+            right_adapter.notifyDataSetChanged()
         })
         homeViewModel.fetchData()
-
-        return root
     }
 }

@@ -22,19 +22,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="self"/>
+            android:text="@string/self_stock"/>
         <RadioButton
             android:id="@+id/fund_rtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="mine"/>
+            android:text="@string/fund_stock"/>
         <RadioButton
             android:id="@+id/moni_rtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="moni"/>
+            android:text="@string/moni_stock"/>
     </RadioGroup>
     <TextView
         android:id="@+id/text_slideshow"

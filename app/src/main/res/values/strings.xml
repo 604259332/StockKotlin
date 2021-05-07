@@ -11,5 +11,9 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <string name="self_stock">Self</string>
+    <string name="fund_stock">Fund</string>
+    <string name="moni_stock">Moni</string>
+
     <string name="addsuccess"> SuccessFully</string>
 </resources>

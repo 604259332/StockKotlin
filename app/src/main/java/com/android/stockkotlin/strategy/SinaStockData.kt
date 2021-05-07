@@ -47,6 +47,8 @@ class SinaStockData():StockDataStrategy<Stock>{
                 }else{
                     price = result[3].toFloat()
                 }
+
+                summoney = result[9].toFloat()
             }
             stocklist.add(stock)
         }

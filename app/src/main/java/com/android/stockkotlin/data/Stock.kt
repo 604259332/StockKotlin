@@ -13,6 +13,7 @@ class Stock() {
     var open: Float=1.00f
     var close: Float=1.00f
     var price: Float=0f
+    var summoney:Float=0f
 
     constructor(stockid: String) : this() {
         if(!stockid.equals("")){

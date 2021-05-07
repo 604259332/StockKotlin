@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="menu_home">self</string>
-    <string name="menu_gallery">mine</string>
-    <string name="menu_slideshow">添加</string>
+    <string name="app_name">牛牛软件</string>
+    <string name="menu_home">牛牛自选</string>
+    <string name="menu_gallery">资金持仓</string>
+    <string name="menu_slideshow">添加牛股</string>
 
     <string name="addsuccess"> 添加成功</string>
+
+    <string name="self_stock">自选股票</string>
+    <string name="fund_stock">持仓股票</string>
+    <string name="moni_stock">模拟炒股</string>
 </resources>

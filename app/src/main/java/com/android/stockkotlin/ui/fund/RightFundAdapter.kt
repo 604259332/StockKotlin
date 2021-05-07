@@ -30,7 +30,7 @@ class RightFundAdapter: HeadRecyclerAdapter<Fund> {
 
     override fun onbindHolder(holder: RecyclerView.ViewHolder, realPosition: Int, data: Fund) {
 
-        if (holder is RightFundAdapter.FundViewHolder) {
+        if (holder is FundViewHolder) {
             holder.numlayout.setAllText(data.num.toString(), data.num.toString())
             if (data.stockid.digitIs1or5()) {
                 holder.pricelayout.setAllText(data.price.floatTail(3), data.myprice.floatTail(3))
