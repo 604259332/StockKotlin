@@ -39,7 +39,6 @@ fun List<Fund>.sum(n:String):Float{
         "amount" ->{
 
             for(fund in this){
-                Log.d("zhihai.yu ppppppppppp:" , ""+fund.toString())
                 sum = sum+fund.amount
             }
         }

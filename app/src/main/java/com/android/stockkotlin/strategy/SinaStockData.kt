@@ -1,7 +1,6 @@
 package com.android.stockkotlin.strategy
 
 import android.util.Log
-import com.android.stockkotlin.data.AppDatabase
 import com.android.stockkotlin.data.Stock
 
 class SinaStockData():StockDataStrategy<Stock>{
@@ -9,15 +8,15 @@ class SinaStockData():StockDataStrategy<Stock>{
 
     /**
      * https://hq.sinajs.cn/list=sh600585,sh600150,sh600109,sz300758,
+     *
      */
-    override fun getParams(database: AppDatabase): String {
-        val stockDao = database.stockDao()
-        var sum=""
-        for(a in stockDao.getAll()){
-            sum += a.stockid+","
-        }
+    override fun getParams(stockId: List<String>): String {
+        var sum = ""
 
-        return testurl+sum
+        for(str in stockId){
+            sum += str + ","
+        }
+        return testurl + sum
     }
 
     /**
@@ -39,15 +38,24 @@ class SinaStockData():StockDataStrategy<Stock>{
                 continue
             }
             var stock = Stock().apply {
-                stockid = result[0]
+                stockid = getstockIdFromResult(result[0])
                 name = result[0].filter { c -> c.toString().matches(Regex("[\u4e00-\u9fa5]")) }
                 open = result[1].toFloat()
                 close = result[2].toFloat()
-                price = result[3].toFloat()
+                if(result[3].toFloat() == 0f){
+                    price = close
+                }else{
+                    price = result[3].toFloat()
+                }
             }
             stocklist.add(stock)
         }
 
         return stocklist
+    }
+
+    fun getstockIdFromResult(str:String):String{
+
+        return str.subSequence(12,20).toString()
     }
 }

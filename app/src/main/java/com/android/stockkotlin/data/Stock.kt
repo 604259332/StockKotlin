@@ -12,7 +12,7 @@ class Stock() {
     @ColumnInfo(name = "_name")  var name: String=""
     var open: Float=1.00f
     var close: Float=1.00f
-    var price: Float=1f
+    var price: Float=0f
 
     constructor(stockid: String) : this() {
         if(!stockid.equals("")){

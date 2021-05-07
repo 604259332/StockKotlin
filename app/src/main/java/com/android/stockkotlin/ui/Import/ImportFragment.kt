@@ -14,6 +14,7 @@ import com.android.stockkotlin.strategy.Insert
 import com.android.stockkotlin.strategy.InsertFundData
 import com.android.stockkotlin.strategy.InsertStockData
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_import.*
 
 class ImportFragment : Fragment() {

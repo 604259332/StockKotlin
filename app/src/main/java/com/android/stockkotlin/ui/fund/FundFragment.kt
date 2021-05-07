@@ -138,6 +138,8 @@ class FundFragment : Fragment(){
 
         totalprofit.setBottomText(funds.sum("profit").floatTail(2))
 
+        var todaysumpercent = funds.sum("today")*100 / (funds.sum("amount") + kuse_f)
+        todayfund.setTopText(todaysumpercent.floatTail(2)+"%")
         todayfund.setBottomText(funds.sum("today").floatTail(2))
 
     }

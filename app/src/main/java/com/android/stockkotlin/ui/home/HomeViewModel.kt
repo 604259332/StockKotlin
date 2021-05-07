@@ -12,7 +12,6 @@ import com.android.stockkotlin.strategy.StockDataStrategy
 import com.android.stockkotlin.strategy.SinaStockData
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
-import kotlin.collections.ArrayList
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -35,18 +34,16 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
            return _stocks
         }
 
-
     fun fetchData() {
 
+        var stockidlist = db.stockDao().getAll().map { it.stockid }
+
         var stringRequest: StringRequest =
-                StringRequest(stockDataStrategy.getParams(db), Response.Listener<String> {
+            StringRequest(stockDataStrategy.getParams(stockidlist), Response.Listener<String> {
+                _stocks.value = stockDataStrategy.parseResponse(it)
 
-                    Log.d("zhihai", it)
-                    _stocks.value = stockDataStrategy.parseResponse(it)
-
-                }, Response.ErrorListener {
-                    Log.d("zhihai.yu", it.toString())
-                })
+            }, Response.ErrorListener {
+            })
         VolleySingletion.requestQueue.add(stringRequest)
 
         VolleySingletion.requestQueue.addRequestFinishedListener<String> {

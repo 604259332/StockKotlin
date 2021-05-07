@@ -8,21 +8,22 @@ import androidx.lifecycle.MutableLiveData
 import com.android.stockkotlin.VolleySingletion
 import com.android.stockkotlin.data.AppDatabase
 import com.android.stockkotlin.data.Fund
-import com.android.stockkotlin.data.FundDao
+import com.android.stockkotlin.data.Stock
+import com.android.stockkotlin.strategy.SinaStockData
+import com.android.stockkotlin.strategy.StockDataStrategy
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 
 class FundViewModel(application: Application) : AndroidViewModel(application) {
 
-    lateinit var fundDao: FundDao
-    val testurl = "https://hq.sinajs.cn/list="
+    lateinit var stockDataStrategy: StockDataStrategy<Stock>
+    lateinit var db:AppDatabase
     init {
-        fundDao = AppDatabase.getDatabase(application).fundDao()
+        db = AppDatabase.getDatabase(application)
+        stockDataStrategy = SinaStockData()
     }
 
     private val _funds = MutableLiveData<List<Fund>>().apply {
-        Log.d("zhihai.yu","Fund apply")
-
         value = listOf<Fund>(
             Fund("sz002230", "test Name")
         )
@@ -33,41 +34,26 @@ class FundViewModel(application: Application) : AndroidViewModel(application) {
         }
 
     fun fetchData() {
-        var fundlist: MutableList<Fund> = ArrayList<Fund>()
-        var result: List<String>
+        var funds = db.fundDao().getAll()
+        var stringRequest: StringRequest =
+            StringRequest(
+                stockDataStrategy.getParams(funds.map { it.stockid }),
+                Response.Listener<String> {
+                    var stocks = stockDataStrategy.parseResponse(it)
 
-        for (localfund in fundDao.getAll()) {
-            Log.d("zhihaitest", "${testurl + localfund.stockid}")
-            var stringRequest: StringRequest =
-                StringRequest(testurl + localfund.stockid, Response.Listener<String> {
-                    Log.d("zhihai", it)
-                    if (it.contains("FAILED", false)) {
-                        return@Listener
+                    for (i in funds.indices) {
+                        funds.get(i).stockid = stocks.get(i).stockid
+                        funds.get(i).name = stocks.get(i).name
+                        funds.get(i).close = stocks.get(i).close
+                        funds.get(i).price = stocks.get(i).price
                     }
-                    result = it.split(",")
-
-                    var fund = Fund().apply {
-                        stockid = localfund.stockid
-                        name =
-                            result[0].filter { c -> c.toString().matches(Regex("[\u4e00-\u9fa5]")) }
-                        close = result[2].toFloat()
-                        price = result[3].toFloat()
-                        num = localfund.num
-                        myprice = localfund.myprice
-
-                    }
-
-                    //test
-                    repeat(1){
-                        fundlist.add(fund)
-                    }
-
-                    _funds.value = fundlist
-                }, Response.ErrorListener {
+                    _funds.value = funds
+                },
+                Response.ErrorListener {
                     Log.d("zhihai.yu", it.toString())
                 })
-            VolleySingletion.requestQueue.add(stringRequest)
-        }
+        VolleySingletion.requestQueue.add(stringRequest)
+
         VolleySingletion.requestQueue.addRequestFinishedListener<String> {
 
         }
@@ -75,7 +61,7 @@ class FundViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteByStockId(stockId:String){
 
-        fundDao.deleteByStockId(stockId)
+        db.fundDao().deleteByStockId(stockId)
 
         (_funds.value as MutableList<Fund>).removeIf{
             stockId ==it.stockid

@@ -35,11 +35,9 @@ class MainActivity : AppCompatActivity() {
 
             when(nav_view.checkedItem){
                 nav_view.menu.findItem(R.id.nav_home) -> {
-                    Log.d("zhihai" , "is HomeFragment")
 
                 }
                 nav_view.menu.findItem(R.id.nav_gallery) ->{
-                    Log.d("zhihai" , "is FundFragment")
                 }
             }
         }
