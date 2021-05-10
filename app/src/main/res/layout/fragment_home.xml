@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.stockkotlin.ui.RefreshLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refreshlayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginBottom="20dp"
-    tools:context=".ui.fund.FundFragment">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="95dp"
-        android:layout_height="wrap_content"
-        app:contentPaddingRight="0dp"
-        app:cardElevation="0dp">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/left_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            />
-    </androidx.cardview.widget.CardView>
-    <com.android.stockkotlin.ui.SwapScrollView
-        android:id="@+id/rightScrollView"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/right_rv"
-            android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        tools:context=".ui.fund.FundFragment">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
-            />
+            app:contentPaddingRight="0dp"
+            app:cardElevation="0dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/left_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                />
+        </androidx.cardview.widget.CardView>
+        <com.android.stockkotlin.ui.SwapScrollView
+            android:id="@+id/rightScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
 
-    </com.android.stockkotlin.ui.SwapScrollView>
-</LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/right_rv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </com.android.stockkotlin.ui.SwapScrollView>
+    </LinearLayout>
+
+</com.android.stockkotlin.ui.RefreshLinearLayout>
+
+

@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.stockkotlin.R
 import com.android.stockkotlin.data.Stock
 import com.android.stockkotlin.ui.HeadRecyclerAdapter
+import com.android.stockkotlin.ui.RefreshLinearLayout
 import com.android.stockkotlin.ui.SimpleItemDecoration
 import com.android.stockkotlin.ui.SwapScrollView
-import kotlinx.android.synthetic.main.fragment_home.cardView
-import kotlinx.android.synthetic.main.fragment_home.left_rv
-import kotlinx.android.synthetic.main.fragment_home.right_rv
-import kotlinx.android.synthetic.main.fragment_home.rightScrollView
+import kotlinx.android.synthetic.main.fragment_home.*
+
+
 
 class HomeFragment : Fragment() {
 
@@ -105,6 +105,14 @@ class HomeFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
+        refreshlayout.setOnRefreshListener(object: RefreshLinearLayout.OnRefreshListener {
+            override fun onRefresh() {
+                homeViewModel.fetchData()
+
+                refreshlayout.postDelayed(Runnable { refreshlayout.completeRefresh() }, 800)
+
+            }
+        })
 
         homeViewModel.stocks.observe(viewLifecycleOwner, Observer {
             left_adapter.datas = it
@@ -112,7 +120,10 @@ class HomeFragment : Fragment() {
 
             right_adapter.datas = it
             right_adapter.notifyDataSetChanged()
+
+
         })
+
         homeViewModel.fetchData()
     }
 }
