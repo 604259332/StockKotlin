@@ -16,7 +16,6 @@ class SimpleItemDecoration(var context: Context,var orientation:Int): RecyclerVi
     lateinit var mDivider:Drawable
     var mDividerHeight:Int =2
     init {
-        Log.d("zhihai","orientation = " +orientation)
         if (orientation != LinearLayoutManager.VERTICAL && orientation != LinearLayoutManager.HORIZONTAL) {
             throw IllegalArgumentException("请输入正确的参数！");
         }

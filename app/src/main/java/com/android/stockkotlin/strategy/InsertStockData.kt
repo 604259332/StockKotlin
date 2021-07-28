@@ -11,7 +11,6 @@ class InsertStockData: Insert {
     override fun insertData(context: Context,stockid: String, myprice: Float, num: Int) {
         var stock: Stock =
             Stock(stockid)
-        Log.d("zhihai",stock.toString())
         AppDatabase.getDatabase(context).stockDao().insertStock(stock)
 
     }

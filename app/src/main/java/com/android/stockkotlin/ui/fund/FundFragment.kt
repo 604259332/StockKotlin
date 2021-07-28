@@ -129,7 +129,7 @@ class FundFragment : Fragment(){
     }
 
     fun setmainFundText(funds:List<Fund>){
-        var kuse_f=3285.79f
+        var kuse_f=0.0f
         kuse.setBottomText(kuse_f.floatTail(2))
         totalFund.setBottomText((funds.sum("amount") + kuse_f).floatTail(2))
 

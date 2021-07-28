@@ -64,12 +64,8 @@ abstract class AppDatabase : RoomDatabase(){
                     ))
 
                     INSTANCE?.fundDao()?.insertAll(listOf<Fund>(
-                        Fund("sh600585",55.495f,1200),
                         Fund("sz123102",100.0f,10),
                         Fund("sz127027",100.0f,10),
-                        Fund("sz300758",29.127f,300),
-                        Fund("sh600150",19.540f,500),
-                        Fund("sh603323",5.493f,1500),
                         Fund("sz002146",7.434f,1300)
                     ))
                 })

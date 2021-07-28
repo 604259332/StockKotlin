@@ -50,7 +50,6 @@ class FundViewModel(application: Application) : AndroidViewModel(application) {
                     _funds.value = funds
                 },
                 Response.ErrorListener {
-                    Log.d("zhihai.yu", it.toString())
                 })
         VolleySingletion.requestQueue.add(stringRequest)
 

@@ -47,15 +47,12 @@ class ImportFragment : Fragment() {
         radiogroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.stock_rtn-> {
-                    Log.d("zhihai","stock_rtn")
                     setInsertStrategy(InsertStockData())
                 }
                 R.id.fund_rtn -> {
-                    Log.d("zhihai","fund_rtn")
                     setInsertStrategy(InsertFundData())
                 }
                 R.id.moni_rtn -> {
-                    Log.d("zhihai","moni_rtn")
                     setInsertStrategy(InsertStockData())
                 }
             }

@@ -10,7 +10,6 @@ class InsertFundData: Insert {
 
         var fund: Fund =
             Fund(stockid, myprice, num)
-        Log.d("zhihai insert",fund.toString())
         AppDatabase.getDatabase(context).fundDao().insertFund(fund)
     }
 }
