@@ -1,2 +1,2 @@
 # StockKotlin
-Mobile stock software
+A mobile stock app , which used android jetpack.
